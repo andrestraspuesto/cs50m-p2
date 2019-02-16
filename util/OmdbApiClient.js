@@ -14,17 +14,15 @@ const findByTitle = async (title) => {
     const queryTitle = title? `&s=${title}`: '';
     const response = await fetch(apiUrl + queryTitle);
     const json = await response.json();
-    //console.log(json);
-    //const result = json.Search.map(parseMovie);
-   // console.log(result)
     return json.Search
 }
 
 const findById = async (id) => {
+    console.log(id)
     const queryId = id? `&i=${id}`: '';
     const response = await fetch(apiUrl + queryId);
     const json = await response.json();
-    console.log(json.Title);
+    console.log(json);
     return json;
 }
 
