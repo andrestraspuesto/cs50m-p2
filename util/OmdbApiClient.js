@@ -10,8 +10,8 @@ const parseMovie = (movie) => ({
     image: movie.Poster
 })
 
-const findByTitle = async (title) => {
-    const queryTitle = title? `&s=${title}`: '';
+const findByTitle = async (title, page = 1) => {
+    const queryTitle = title? `&page=${page}&s=${title}`: '';
     const response = await fetch(apiUrl + queryTitle);
     const json = await response.json();
     return json.Search

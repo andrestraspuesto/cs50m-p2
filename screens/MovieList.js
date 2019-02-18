@@ -24,6 +24,7 @@ export default class MovieList extends React.Component {
         data={this.props.list}
         keyExtractor={p => p.imdbID}
         renderItem={({item}) => this.renderMovie(item)}
+        onEndReached={this.props.nextPage}
       />
     );
   }

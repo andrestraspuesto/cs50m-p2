@@ -11,21 +11,34 @@ export default class Home extends React.Component {
       };
 
     state = {
-      movieList: []
+      movieList: [],
+      page: 1,
+      query: ''
     }
   
     render() {
       return (
         <View style={styles.container}>
           <MovieSeekier search={this.search} />
-          <MovieList list={this.state.movieList} navigation={this.props.navigation}/>
+          <MovieList list={this.state.movieList} 
+            navigation={this.props.navigation}
+            nextPage={this.nextPage} 
+            />
         </View>
       );
     }
   
     search = (query) => {
       if(query && query.length > 2){
-        findByTitle(query).then(data => this.setState({movieList: data}))
+        findByTitle(query, 1).then(data => this.setState({movieList: data}))
+        this.setState({page: 2, query: query})
+      }
+    }
+
+    nextPage = () => {
+      if(this.state.query && this.state.query.length > 2){
+        findByTitle(this.state.query, this.state.page).then(data => this.setState({movieList: [... this.state.movieList, ...data]}))
+        this.setState({page: this.state.page + 1})
       }
     }
   }
